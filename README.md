@@ -1,6 +1,15 @@
-# next-greenfield
+<p align="center">
+  <img src="app/icon.svg" alt="Greenfield logo" width="96" height="96" />
+</p>
 
-A ready-to-go starter kit for building a modern website. Everything is pre-wired so you can start building features instead of fiddling with setup.
+<h1 align="center">Greenfield</h1>
+
+<p align="center">
+  A ready-to-go starter kit for building a modern website.<br/>
+  Everything is pre-wired so you can start building features instead of fiddling with setup.
+</p>
+
+---
 
 ## Getting started (the short version)
 

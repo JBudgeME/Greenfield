@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "next-greenfield",
+      "name": "greenfield",
       "dependencies": {
         "@hookform/resolvers": "^5.0.0",
         "@hugeicons/core-free-icons": "^4.1.3",

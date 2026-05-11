@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "next-greenfield",
+  title: "Greenfield",
   description: "Next.js 16 + React 19 + Tailwind v4 + shadcn/ui starter.",
 };
 
