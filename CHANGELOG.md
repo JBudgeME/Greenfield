@@ -2,6 +2,34 @@
 
 All notable changes to this template are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow [SemVer](https://semver.org/).
 
+## [0.1.1] - 2026-05-11
+
+Boilerplate hardening: better defaults, more conventions covered, CI on day one.
+
+### Added
+
+- Added `app/about/page.tsx` as a second Server Component route to demonstrate App Router routing conventions.
+- Added `components/site-nav.tsx` — a shared header with route links and the theme toggle, mounted once in the root layout.
+- Added `components/demo-buttons.tsx` as a small client island so `app/page.tsx` can stay a Server Component.
+- Added `app/robots.ts` and `app/sitemap.ts` using `NEXT_PUBLIC_SITE_URL` for SEO file conventions.
+- Added `metadataBase`, default `openGraph` and `twitter` blocks, a `title.template`, and a separate `viewport` export with light/dark `themeColor` in `app/layout.tsx`.
+- Added Prettier (`prettier` + `prettier-plugin-tailwindcss` + `eslint-config-prettier`) with `.prettierrc.json`, `.prettierignore`, and `format` / `format:check` scripts.
+- Added `@next/bundle-analyzer` wired in `next.config.ts` behind `ANALYZE=true`, exposed as `bun run analyze`.
+- Added `simple-git-hooks` + `lint-staged` so each commit runs Prettier and `eslint --fix` on staged files automatically.
+- Added `.github/workflows/ci.yml` running `format:check`, `lint`, `build`, and `test` on every push and PR to `main` using `oven-sh/setup-bun@v2` and `bun install --frozen-lockfile`.
+
+### Changed
+
+- Changed `app/page.tsx` from a client component to a Server Component that renders a server-side timestamp; the toast demo now lives in `components/demo-buttons.tsx`.
+- Changed `--font-sans` to bind to Geist Sans directly, removing the duplicate Inter font request from the layout.
+- Changed `.env.example` to uncomment `NEXT_PUBLIC_SITE_URL` since it is now consumed by `metadataBase`, `robots.ts`, and `sitemap.ts`.
+- Changed the whole tree to Prettier's canonical style on first format pass.
+
+### Removed
+
+- Removed the Inter font import from `app/layout.tsx`.
+- Removed the leftover `bash.exe.stackdump` from the repo root.
+
 ## [0.1.0] - 2026-05-11
 
 Initial template release.
@@ -78,4 +106,3 @@ Each bullet: one sentence, past tense, user-facing language. Reference packages/
 
 - Short description of the vulnerability patched.
 -->
-

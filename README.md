@@ -55,7 +55,9 @@ You also get sensible defaults for cross-platform development (so Mac and Window
 
 These files are already in the project — open any of them and start changing things.
 
-- **Home page** — `app/page.tsx`. The "Hello, world" page you see at <http://localhost:3000>. Has a theme switcher and three demo buttons that show toast notifications.
+- **Home page** — `app/page.tsx`. The "Hello, world" page you see at <http://localhost:3000>. A **Server Component** that renders a server-side timestamp; the three demo buttons are a small **client island** in `components/demo-buttons.tsx`.
+- **About page** — `app/about/page.tsx`. A second route demonstrating how to add pages: drop a folder with a `page.tsx` under `app/`.
+- **Shared header / nav** — `components/site-nav.tsx`. Rendered once in the root layout, links every route, and hosts the theme toggle.
 - **404 / Not Found page** — `app/not-found.tsx`. Shown when a visitor goes to a URL that doesn't exist.
 - **Error page** — `app/error.tsx`. Shown when something on the page crashes. Catches errors so the whole site doesn't break.
 - **Loading page** — `app/loading.tsx`. A placeholder that flashes briefly while the next page is being prepared.
@@ -99,9 +101,10 @@ A running Next.js dev server at <http://localhost:3000> with hot-reload, plus th
   - `react-hook-form` — form state with minimal re-renders.
   - `zod` — schema + inferred TS types.
   - `@hookform/resolvers` — bridges `zod` into `react-hook-form`. Pair with `bunx shadcn@latest add form` for the matching shadcn primitive.
-- **App Router scaffolds** — `app/not-found.tsx` (custom 404), `app/error.tsx` (error boundary), `app/loading.tsx` (Suspense fallback), `app/icon.svg` (favicon — Next auto-serves at all sizes).
+- **App Router scaffolds** — `app/not-found.tsx` (custom 404), `app/error.tsx` (error boundary), `app/loading.tsx` (Suspense fallback), `app/icon.svg` (favicon — Next auto-serves at all sizes), `app/robots.ts` + `app/sitemap.ts` (SEO file conventions wired off `NEXT_PUBLIC_SITE_URL`).
 - **Testing** — `bun:test` (built-in, ~5–10× faster than vitest) with `happy-dom` for the DOM and `@testing-library/react` + `@testing-library/user-event` + `@testing-library/jest-dom` for component tests. Setup files in `test/`, wired via `bunfig.toml`. Sample tests in `lib/utils.test.ts` and `components/ui/button.test.tsx`.
-- **Tooling** — `typescript@6`, `eslint@9` + `eslint-config-next`, ambient `@types/*` and `@types/bun`.
+- **Tooling** — `typescript@6`, `eslint@9` + `eslint-config-next` + `eslint-config-prettier`, `prettier` + `prettier-plugin-tailwindcss` (sorts Tailwind classes on format), `@next/bundle-analyzer` (opt-in via `ANALYZE=true`), `simple-git-hooks` + `lint-staged` (pre-commit runs Prettier + `eslint --fix` on staged files), ambient `@types/*` and `@types/bun`.
+- **CI** — `.github/workflows/ci.yml` runs `format:check`, `lint`, `build`, and `test` on every push and PR to `main` using `oven-sh/setup-bun@v2` and `bun install --frozen-lockfile`.
 
 **Postinstall gate** — `sharp` and `unrs-resolver` skip their native postinstall scripts by default. If image optimization or the native resolver misbehaves, opt in with:
 
@@ -111,15 +114,18 @@ bun pm trust sharp unrs-resolver
 
 ## Scripts
 
-| Command | What it does |
-|---|---|
-| `bun install` | Install dependencies (uses committed `bun.lock`) |
-| `bun dev` | Next.js dev server |
-| `bun run build` | Production build |
-| `bun start` | Serve the production build |
-| `bun lint` | ESLint (flat config) |
-| `bun test` | Run the test suite (`bun:test` + happy-dom + Testing Library) |
-| `bun run test:watch` | Tests in watch mode |
+| Command                | What it does                                                             |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `bun install`          | Install dependencies (uses committed `bun.lock`)                         |
+| `bun dev`              | Next.js dev server                                                       |
+| `bun run build`        | Production build                                                         |
+| `bun start`            | Serve the production build                                               |
+| `bun lint`             | ESLint (flat config)                                                     |
+| `bun run format`       | Format the whole tree with Prettier (+ Tailwind class sort)              |
+| `bun run format:check` | Verify formatting without writing — what CI runs                         |
+| `bun test`             | Run the test suite (`bun:test` + happy-dom + Testing Library)            |
+| `bun run test:watch`   | Tests in watch mode                                                      |
+| `bun run analyze`      | Production build with `@next/bundle-analyzer` open (sets `ANALYZE=true`) |
 
 ## Conventions worth knowing
 

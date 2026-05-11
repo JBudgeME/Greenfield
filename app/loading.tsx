@@ -4,7 +4,7 @@ export default function Loading() {
       <div
         role="status"
         aria-label="Loading"
-        className="size-6 animate-spin rounded-full border-2 border-muted border-t-foreground"
+        className="border-muted border-t-foreground size-6 animate-spin rounded-full border-2"
       />
     </main>
   );

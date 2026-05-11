@@ -1,22 +1,14 @@
-"use client";
-
-import { toast } from "sonner";
-
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { cn } from "@/lib/utils";
+import { DemoButtons } from "@/components/demo-buttons";
 
 export default function Home() {
+  const renderedAt = new Date().toISOString();
+
   return (
     <main className="flex flex-1 flex-col items-center justify-center gap-8 p-8">
-      <header className="flex w-full max-w-2xl items-center justify-between">
-        <h1 className="font-sans text-2xl font-semibold tracking-tight">
-          Hello, world
-        </h1>
-        <ThemeToggle />
-      </header>
-
       <section className="flex w-full max-w-2xl flex-col gap-4">
+        <h2 className="font-sans text-lg font-semibold tracking-tight">
+          Hello, world
+        </h2>
         <p className="text-muted-foreground text-sm">
           Next.js 16 + React 19 + Tailwind v4 + shadcn/ui. Edit{" "}
           <code className="bg-muted rounded px-1 py-0.5 font-mono text-xs">
@@ -24,24 +16,16 @@ export default function Home() {
           </code>{" "}
           to get started.
         </p>
+        <p className="text-muted-foreground text-xs">
+          Server-rendered at{" "}
+          <time dateTime={renderedAt} className="font-mono">
+            {renderedAt}
+          </time>
+          . This page is a Server Component; the buttons below are a client
+          island.
+        </p>
 
-        <div className={cn("flex flex-wrap gap-2")}>
-          <Button onClick={() => toast.success("It works.")}>
-            Show toast
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => toast.info("Theme toggles in the corner.")}
-          >
-            Info toast
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() => toast.error("Something went wrong.")}
-          >
-            Error toast
-          </Button>
-        </div>
+        <DemoButtons />
       </section>
     </main>
   );

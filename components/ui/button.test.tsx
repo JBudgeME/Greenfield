@@ -7,13 +7,23 @@ import { Button } from "@/components/ui/button";
 describe("Button", () => {
   it("renders its children", () => {
     render(<Button>Click me</Button>);
-    expect(screen.getByRole("button", { name: "Click me" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Click me" }),
+    ).toBeInTheDocument();
   });
 
   it("fires onClick when clicked", async () => {
     const user = userEvent.setup();
     let clicked = false;
-    render(<Button onClick={() => { clicked = true; }}>Tap</Button>);
+    render(
+      <Button
+        onClick={() => {
+          clicked = true;
+        }}
+      >
+        Tap
+      </Button>,
+    );
 
     await user.click(screen.getByRole("button", { name: "Tap" }));
 

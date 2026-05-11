@@ -20,14 +20,14 @@ This installs everything from `bun.lock` into `node_modules/`.
 
 ## Day-to-day
 
-| Command | What it does |
-|---|---|
-| `bun dev` | Start the Next.js dev server at <http://localhost:3000> |
-| `bun test` | Run the test suite |
-| `bun run test:watch` | Run tests in watch mode |
-| `bun lint` | Run ESLint |
-| `bun run build` | Production build |
-| `bun start` | Serve the production build locally |
+| Command              | What it does                                            |
+| -------------------- | ------------------------------------------------------- |
+| `bun dev`            | Start the Next.js dev server at <http://localhost:3000> |
+| `bun test`           | Run the test suite                                      |
+| `bun run test:watch` | Run tests in watch mode                                 |
+| `bun lint`           | Run ESLint                                              |
+| `bun run build`      | Production build                                        |
+| `bun start`          | Serve the production build locally                      |
 
 All of these come from the `scripts` field in `package.json`. Add your own there as the project grows.
 
