@@ -65,7 +65,7 @@ These files are already in the project — open any of them and start changing t
 - **Favicon** — `app/icon.svg`. The little icon shown in the browser tab. Replace this one file and Next.js handles every size automatically.
 - **Global styles & theme colors** — `app/globals.css`. The site's color palette (light and dark mode), fonts, and any CSS that applies everywhere.
 
-To **add a new page** (say, an About page at `/about`), create `app/about/page.tsx` with a default-exported React component. That's the whole step.
+To **add another route** (say, a contact page at `/contact`), create `app/contact/page.tsx` with a default-exported React component, then add an entry to the `links` array in `components/site-nav.tsx` so it shows up in the header. That's the whole step.
 
 ## License
 
@@ -132,5 +132,5 @@ bun pm trust sharp unrs-resolver
 - **`bun.lock` is committed and in sync with `package.json`.** Don't delete it; don't introduce `package-lock.json`, `pnpm-lock.yaml`, or `yarn.lock`. `bun install --frozen-lockfile` works from a fresh clone — safe for CI.
 - **shadcn style is `radix-mira`** (see `components.json`), with `baseColor: neutral` and RSC enabled.
 - **Cross-platform hygiene.** `.gitattributes` forces LF line endings on all text files and `.editorconfig` standardizes indentation and whitespace, so Windows and Mac contributors stay in sync. VS Code users will be prompted to install the recommended extensions in `.vscode/extensions.json` (Tailwind, ESLint, EditorConfig, Bun).
-- **Environment variables.** Copy `.env.example` to `.env.local` and fill in values. When you add a new env var to the project, document it in `.env.example` so others know it exists.
+- **Environment variables.** Copy `.env.example` to `.env.local` and fill in values. When you add a new env var to the project, document it in `.env.example` so others know it exists. `NEXT_PUBLIC_SITE_URL` is consumed by `metadataBase` in `app/layout.tsx`, `app/robots.ts`, and `app/sitemap.ts` — it defaults to `http://localhost:3000`, so set it to your deployed origin (no trailing slash) in production for correct canonical URLs, sitemap entries, and Open Graph image paths.
 - For deeper conventions and AI-agent rules see `AGENTS.md` and `CLAUDE.md`. Topic-specific guides (forms, testing) live in `docs/` and are loaded on demand. For a wider Bun command reference see `BUN-USERGUIDE.md`.
