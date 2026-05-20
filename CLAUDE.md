@@ -1,4 +1,17 @@
 @AGENTS.md
+@SOP.md
+
+## Workflow
+
+`SOP.md` is binding. Before any work, classify the change and pick a route per `SOP.md` §1:
+
+- Substantive feature → §2.1 (grill → PRD → issues → TDD → review → arch-review)
+- Bug fix → §2.2 (`/diagnose` all 6 phases → regression test → review)
+- Refactor / architecture → §2.3
+- Chore → §2.4
+- Trivial fast-path (≤30 LOC, single-file, no public API change, no business-logic change) → §2.5
+
+State the chosen route in the opening response. The SOP overrides individual skill defaults; the user's explicit instructions override the SOP. Skipping a gate requires a written exception per `SOP.md` §6.
 
 ## Gotchas
 
