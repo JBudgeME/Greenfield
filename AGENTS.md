@@ -4,64 +4,42 @@ Cross-tool instructions for AI coding agents (Claude, Codex, Cursor, etc.) worki
 
 **Follow these principles strictly on every task unless explicitly overridden. Bias: caution over speed on any non-trivial work.**
 
-## Core Design Principles
+**Engineering**
 
-- **KISS, DRY, YAGNI**: Prefer the simplest solution. Write the minimum code that fully solves the requested problem. Never add speculative abstractions or unrequested features.
-- **Separation of Concerns + SRP**: Keep UI, logic, data, and config fully separated. Every module, function, or class must have exactly one clear responsibility.
-- **Composition over inheritance**: Prefer small, focused, composable pieces.
-- **Explicit over implicit**: Make no assumptions. Always validate inputs and data explicitly.
-- **Minimal justified abstractions**: Add abstraction only when it clearly reduces duplication or complexity.
-- **Readable & maintainable**: Code must be clear, modular, and production-ready. Match the existing codebase style and conventions unless they are genuinely harmful (in which case, flag it).
+- KISS, DRY, YAGNI — simplest solution that fully solves the request; no speculative abstractions or unrequested features.
+- Separation of concerns + SRP — UI, logic, data, and config stay separate; each module/function/class has one clear responsibility.
+- Composition over inheritance — small, focused, composable pieces.
+- Explicit over implicit — validate inputs and data; never assume silently.
+- Minimal justified abstractions — abstract only when it clearly reduces duplication or complexity.
+- Readable and maintainable — match existing codebase style and conventions; flag harmful ones.
 
-## Safety & Error Handling
+**Safety and error handling**
 
-- **Fail fast and loud**: Surface all errors early with clear, actionable messages. Use defensive checks, proper error handling, and error boundaries. Never swallow errors or silently skip work. If anything is uncertain or incomplete, say so explicitly.
+- Fail fast and loud — surface errors early with actionable messages; never swallow errors or silently skip work.
+- State uncertainty explicitly whenever anything is incomplete or unclear.
 
-## Development Workflow
+**Development workflow**
 
-1. **Think before coding**: State assumptions, ask clarifying questions when uncertain, push back if a simpler approach exists, and stop if confused.
-2. **Read before write**: Always explore relevant existing code (exports, callers, utilities, patterns) first.
-3. **Research before asking**: When uncertainty or questions surface, first perform research, explore options, and reason through them. Provide clear recommendations with justifications. Only ask the user after presenting well-reasoned options.
-4. **Surgical changes**: Modify only what is necessary. Match existing style. Do not refactor unrelated code.
-5. **Goal-driven**: Define clear success criteria and verify the result. Do not follow instructions blindly.
-6. **Tests verify intent**: Write tests that will actually fail when business logic changes.
-7. **Checkpoint often**: Regularly summarize what is done, verified, and still remaining.
-8. **Surface conflicts**: When principles or patterns contradict, choose the stronger one (favor recent/tested), explain your choice, and note the trade-off.
+- Think before coding — state assumptions, push back if a simpler approach exists, stop if confused.
+- Read before write — explore relevant existing code (exports, callers, utilities, patterns) before modifying.
+- Research before asking — present well-reasoned options with recommendations before asking the user.
+- Surgical changes — modify only what's needed; never refactor unrelated code.
+- Goal-driven — define success criteria and verify the result.
+- Tests verify intent — write tests that fail when business logic changes.
+- Checkpoint often — summarize what is done, verified, and remaining.
+- Surface conflicts — when principles contradict, choose the stronger one, explain why, note the trade-off.
 
-## Read the installed Next.js docs before writing Next-specific code
+**Context management**
 
-This project uses **Next.js 16.2.6** and **React 19.2.6**, both of which are newer than most agent training data. APIs have shifted (App Router, RSC, caching, `use cache`, route handlers, etc.) and hallucinated code will silently break.
+- Authoritative sources of truth — PRD for scope, `docs/invariants.md` for system properties, `docs/adr/` for architectural decisions, `CONTEXT.md` for terminology. Do not reconstruct from conversation memory — re-read.
+- Subagents are the right tool for high-volume exploration: dispatch with a tight prompt, read the summary, do not pull raw output into the main context.
 
-Next.js ships its documentation as markdown inside the installed package. Before writing or modifying anything Next-specific (routing, data fetching, caching, middleware, config, metadata, image, font, server actions, etc.), read the relevant file from:
+## GitHub label setup (one-time per fresh clone)
 
+Issues live in GitHub. If the canonical labels do not yet exist in the repo, run:
+
+```sh
+bash scripts/setup-github-labels.sh
 ```
-node_modules/next/dist/docs/
-```
 
-If `node_modules/` is missing, run `bun install` first. Do not write Next-specific code from memory.
-
-## Package manager
-
-**Bun** — `bun.lock` is committed. Use `bun install`, `bun dev`, `bun run build`, `bun lint`. Do not introduce `npm`, `pnpm`, or `yarn` lockfiles.
-
-## Tailwind v4
-
-There is no `tailwind.config.*`. Theme tokens and `@theme` live in `app/globals.css`. Do not create a JS Tailwind config.
-
-## shadcn/ui
-
-Style is `radix-mira` (see `components.json`). Icon library is **Hugeicons** (`@hugeicons/react`), not lucide. Radix primitives come from the `radix-ui` umbrella package (`import { Slot } from "radix-ui"` then `<Slot.Root>`), **not** individual `@radix-ui/react-*` packages — the granular packages are the obvious default and the wrong choice here. Match this pattern when adding components.
-
-Add components via `bunx shadcn@latest add <name>`.
-
-## Topic-specific docs (read on demand)
-
-- Working with forms → read `docs/forms.md`
-- Writing or modifying tests → read `docs/testing.md`
-
-## Project hygiene
-
-- **Line endings: LF.** `.gitattributes` enforces this. Do not introduce CRLF — it will normalize back to LF on commit, but generates noisy diffs in the meantime.
-- **Formatting:** `.editorconfig` defines indent (2 spaces), final newline, trim trailing whitespace. Honor it. Don't reformat unrelated files when editing one.
-- **Environment variables:** Add new vars to `.env.example` (with a comment explaining purpose) the same moment you reference them in code. Never commit `.env` or `.env.local`.
-- **License:** Project is 0BSD. New source files do not need a copyright header.
+Idempotent — safe to re-run.
