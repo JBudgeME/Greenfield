@@ -1,12 +1,11 @@
 ---
 name: to-prd
 description: Turn the current conversation into a PRD and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.
-disable-model-invocation: true
 ---
 
 This skill takes the current conversation context and codebase understanding and produces a PRD. Do NOT interview the user — just synthesize what you already know.
 
-The issue tracker and triage label vocabulary should have been provided to you — run `/setup-matt-pocock-skills` if not.
+The issue tracker and triage label vocabulary are documented at `docs/agents/issue-tracker.md` and `docs/agents/triage-labels.md` — read them if not already provided.
 
 ## Process
 
