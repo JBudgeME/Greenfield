@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="app/icon.svg" alt="Greenfield logo" width="96" height="96" />
+  <img src="app/icon.svg" alt="Logo" width="96" height="96" />
 </p>
 
-<h1 align="center">Greenfield</h1>
+<h1 align="center">[YOUR SITE NAME]</h1>
 
 <p align="center">
   A ready-to-go starter kit for building a modern website.<br/>
@@ -32,6 +32,21 @@ You need one tool installed: **Bun**. It's a faster replacement for Node and npm
 3. **Open the site in your browser**: <http://localhost:3000>
 
 That's it. The page reloads automatically as you edit files. Start by opening `app/page.tsx` and changing some text.
+
+## Make it yours
+
+This template ships with placeholders instead of a brand. Replace these before you publish:
+
+| Placeholder                            | Where                             | What to put there                                     |
+| -------------------------------------- | --------------------------------- | ----------------------------------------------------- |
+| `[YOUR SITE NAME]`                     | `lib/site.ts`, top of this README | Your site's name (drives the nav, `<title>`, OG tags) |
+| `[One sentence describing your site.]` | `lib/site.ts`                     | Meta description used by search engines and previews  |
+| `my-app`                               | `package.json` → `name`           | A package name for your project                       |
+| `[YOUR NAME]`                          | `LICENSE`                         | Your name or organization                             |
+| `app/icon.svg`                         | —                                 | Your favicon / logo                                   |
+| `NEXT_PUBLIC_SITE_URL`                 | `.env.example` → `.env.local`     | Your deployed origin                                  |
+
+The pages under `app/` are **not** a real site. They are small examples that show the included libraries working: the home page demos toasts (Sonner) and buttons (shadcn/ui), the nav demos the theme toggle (next-themes), and the about page demos a static Server Component. Delete or rewrite them once you've seen how each piece works.
 
 ## What you're getting (in plain English)
 

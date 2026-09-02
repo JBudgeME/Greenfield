@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "greenfield",
+      "name": "my-app",
       "dependencies": {
         "@hookform/resolvers": "^5.0.0",
         "@hugeicons/core-free-icons": "^4.1.3",

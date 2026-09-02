@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { SiteNav } from "@/components/site-nav";
+import { siteConfig } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -21,21 +22,21 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Greenfield",
-    template: "%s · Greenfield",
+    default: siteConfig.name,
+    template: `%s · ${siteConfig.name}`,
   },
-  description: "Next.js 16 + React 19 + Tailwind v4 + shadcn/ui starter.",
+  description: siteConfig.description,
   openGraph: {
     type: "website",
-    siteName: "Greenfield",
-    title: "Greenfield",
-    description: "Next.js 16 + React 19 + Tailwind v4 + shadcn/ui starter.",
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description: siteConfig.description,
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Greenfield",
-    description: "Next.js 16 + React 19 + Tailwind v4 + shadcn/ui starter.",
+    title: siteConfig.name,
+    description: siteConfig.description,
   },
 };
 

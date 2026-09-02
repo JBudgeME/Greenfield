@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { siteConfig } from "@/lib/site";
 
 const links = [
   { href: "/", label: "Home" },
@@ -13,7 +14,7 @@ export function SiteNav() {
       <div className="mx-auto flex w-full max-w-2xl items-center justify-between gap-4 p-4">
         <nav className="flex items-center gap-4 text-sm">
           <Link href="/" className="font-semibold tracking-tight">
-            Greenfield
+            {siteConfig.name}
           </Link>
           <ul className="text-muted-foreground flex items-center gap-3">
             {links.map((link) => (
