@@ -2,6 +2,16 @@
 
 All notable changes to this template are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow [SemVer](https://semver.org/).
 
+## [0.2.0] - 2026-09-02
+
+Generalized the template: removed all AI-agent tooling so it is a plain Bun + Next.js starter.
+
+### Removed
+
+- Removed `.claude/` (skills, hooks, settings), `AGENTS.md`, `CLAUDE.md`, `CONTEXT.md`, and `docs/agents/`.
+- Removed `scripts/open-work.ts` and `scripts/setup-github-labels.sh` (GitHub issue tooling for agents).
+- Removed the stray `package-lock.json`; `bun.lock` is the only lockfile.
+
 ## [0.1.1] - 2026-05-11
 
 Boilerplate hardening: better defaults, more conventions covered, CI on day one.
