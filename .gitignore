@@ -63,3 +63,6 @@ $RECYCLE.BIN/
 
 # misc
 *.pem
+
+# AI agent config (local only)
+.claude/
